@@ -41,15 +41,12 @@ class TennisGame1 implements TennisGame
 
     private function getTieScore(): string
     {
-        if ($this->player1Score == 0) {
-            return "Love-All";
+        $scoreResults = ["Love-All", "Fifteen-All", "Thirty-All"];
+
+        if ($this->player1Score < 3) {
+            return $scoreResults[$this->player1Score];
         }
-        if ($this->player1Score == 1) {
-            return "Fifteen-All";
-        }
-        if ($this->player1Score == 2) {
-            return "Thirty-All";
-        }
+
         return "Deuce";
     }
 
