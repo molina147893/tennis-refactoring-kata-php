@@ -30,7 +30,8 @@ class TennisGame1 implements TennisGame
                 return "Thirty-All";
             }
                 return "Deuce";
-        } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
+        }
+        if ($this->player1Score >= 4 || $this->player2Score >= 4) {
             $minusResult = $this->player1Score - $this->player2Score;
             if ($minusResult == 1) {
                 return "Advantage " . $this->player1Name;
@@ -42,26 +43,25 @@ class TennisGame1 implements TennisGame
                 return "Win for ". $this->player1Name;
             }
             return "Win for ". $this->player2Name;
-        } else {
-            for ($player = 1; $player < 3; $player++) {
-                if ($player == 1) {
-                    $tempScore = $this->player1Score;
-                } else {
-                    $score .= "-";
-                    $tempScore = $this->player2Score;
-                }
-                if ($tempScore == 0) {
-                    $score .= "Love";
-                }
-                if ($tempScore == 1) {
-                    $score .= "Fifteen";
-                }
-                if ($tempScore == 2) {
-                    $score .= "Thirty";
-                }
-                if ($tempScore == 3) {
-                    $score .= "Forty";
-                }
+        }
+        for ($player = 1; $player < 3; $player++) {
+            if ($player == 1) {
+                $tempScore = $this->player1Score;
+            } else {
+                $score .= "-";
+                $tempScore = $this->player2Score;
+            }
+            if ($tempScore == 0) {
+                $score .= "Love";
+            }
+            if ($tempScore == 1) {
+                $score .= "Fifteen";
+            }
+            if ($tempScore == 2) {
+                $score .= "Thirty";
+            }
+            if ($tempScore == 3) {
+                $score .= "Forty";
             }
         }
         return $score;
