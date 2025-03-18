@@ -33,10 +33,19 @@ class TennisGame1 implements TennisGame
         return $this->getDefaultScore();
     }
 
-
     private function isTie(): bool
     {
         return $this->player1Score == $this->player2Score;
+    }
+
+    private function isAdvantage(): bool
+    {
+        return $this->hasMoreThanFourthPoints() && $this->getAbsoluteScoreDifference() == 1;
+    }
+
+    private function isWin(): bool
+    {
+        return $this->hasMoreThanFourthPoints() && $this->getAbsoluteScoreDifference() >= 2;
     }
 
     private function getTieScore(): string
@@ -50,14 +59,14 @@ class TennisGame1 implements TennisGame
         return "Deuce";
     }
 
-    private function isAdvantage(): bool
-    {
-        return $this->hasMoreThanFourthPoints() && $this->getAbsoluteScoreDifference() == 1;
-    }
-
     private function getAdvantageScore(): string
     {
         return "Advantage " . $this->getGoesAheadPlayerName();
+    }
+
+    private function getWinScore(): string
+    {
+        return "Win for " . $this->getGoesAheadPlayerName();
     }
 
     private function getDefaultScore(): string
@@ -70,30 +79,24 @@ class TennisGame1 implements TennisGame
                 $score .= "-";
                 $tempScore = $this->player2Score;
             }
+
             if ($tempScore == 0) {
                 $score .= "Love";
             }
+
             if ($tempScore == 1) {
                 $score .= "Fifteen";
             }
+
             if ($tempScore == 2) {
                 $score .= "Thirty";
             }
+
             if ($tempScore == 3) {
                 $score .= "Forty";
             }
         }
         return $score;
-    }
-
-    private function isWin(): bool
-    {
-        return $this->hasMoreThanFourthPoints() && $this->getAbsoluteScoreDifference() >= 2;
-    }
-
-    private function getWinScore(): string
-    {
-        return "Win for " . $this->getGoesAheadPlayerName();
     }
 
     public function getGoesAheadPlayerName(): string
