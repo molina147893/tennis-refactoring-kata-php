@@ -18,7 +18,6 @@ class TennisGame1 implements TennisGame
 
     public function getScore(): string
     {
-        $score = "";
         if ($this->isTie()) {
             return $this->getTieScore();
         }
@@ -31,15 +30,16 @@ class TennisGame1 implements TennisGame
             return $this->getWinScore();
         }
 
-        return $this->getDefaultScore($score);
+        return $this->getDefaultScore();
     }
 
-    public function isTie(): bool
+
+    private function isTie(): bool
     {
         return $this->player1Score == $this->player2Score;
     }
 
-    public function getTieScore(): string
+    private function getTieScore(): string
     {
         if ($this->player1Score == 0) {
             return "Love-All";
@@ -53,24 +53,21 @@ class TennisGame1 implements TennisGame
         return "Deuce";
     }
 
-    public function isAdvantage(): bool
+    private function isAdvantage(): bool
     {
         return ($this->player1Score >= 4 || $this->player2Score >= 4) && abs($this->player1Score - $this->player2Score) == 1;
     }
 
-    public function getAdvantageScore(): string
+    private function getAdvantageScore(): string
     {
         $minusResult = $this->player1Score - $this->player2Score;
 
         return "Advantage " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
     }
 
-    /**
-     * @param string $score
-     * @return string
-     */
-    public function getDefaultScore(string $score): string
+    private function getDefaultScore(): string
     {
+        $score = "";
         for ($player = 1; $player < 3; $player++) {
             if ($player == 1) {
                 $tempScore = $this->player1Score;
