@@ -20,52 +20,47 @@ class TennisGame1 implements TennisGame
     {
         $score = "";
         if ($this->player1Score == $this->player2Score) {
-            switch ($this->player1Score) {
-                case 0:
-                    $score = "Love-All";
-                    break;
-                case 1:
-                    $score = "Fifteen-All";
-                    break;
-                case 2:
-                    $score = "Thirty-All";
-                    break;
-                default:
-                    $score = "Deuce";
-                    break;
+            if ($this->player1Score == 0) {
+                return "Love-All";
             }
+            if ($this->player1Score == 1) {
+                return "Fifteen-All";
+            }
+            if ($this->player1Score == 2) {
+                return "Thirty-All";
+            }
+                return "Deuce";
         } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
             $minusResult = $this->player1Score - $this->player2Score;
             if ($minusResult == 1) {
-                $score = "Advantage ". $this->player1Name;
-            } elseif ($minusResult == -1) {
-                $score = "Advantage ". $this->player2Name;
-            } elseif ($minusResult >= 2) {
-                $score = "Win for ". $this->player1Name;
-            } else {
-                $score = "Win for ". $this->player2Name;
+                return "Advantage " . $this->player1Name;
             }
+            if ($minusResult == -1) {
+                return "Advantage ". $this->player2Name;
+            }
+            if ($minusResult >= 2) {
+                return "Win for ". $this->player1Name;
+            }
+            return "Win for ". $this->player2Name;
         } else {
-            for ($i = 1; $i < 3; $i++) {
-                if ($i == 1) {
+            for ($player = 1; $player < 3; $player++) {
+                if ($player == 1) {
                     $tempScore = $this->player1Score;
                 } else {
                     $score .= "-";
                     $tempScore = $this->player2Score;
                 }
-                switch ($tempScore) {
-                    case 0:
-                        $score .= "Love";
-                        break;
-                    case 1:
-                        $score .= "Fifteen";
-                        break;
-                    case 2:
-                        $score .= "Thirty";
-                        break;
-                    case 3:
-                        $score .= "Forty";
-                        break;
+                if ($tempScore == 0) {
+                    $score .= "Love";
+                }
+                if ($tempScore == 1) {
+                    $score .= "Fifteen";
+                }
+                if ($tempScore == 2) {
+                    $score .= "Thirty";
+                }
+                if ($tempScore == 3) {
+                    $score .= "Forty";
                 }
             }
         }
