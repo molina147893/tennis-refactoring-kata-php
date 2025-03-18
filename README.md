@@ -24,6 +24,22 @@ resultado del juego es "Advantage" para el jugador que va en cabeza.
 Sólo necesitas reportar el resultado del juego actual. Este es un primer desarrollo, por lo tanto, ahora los sets y 
 juegos quedan fuera del contexto. ¡Más vale!
 
+# Ejecutar los tests
+
+1. Install [composer](https://getcomposer.org) locally:
+
+	`curl -sS https://getcomposer.org/installer | php`
+2. Install dependencies:
+
+	`composer install`
+3. Run the tests for all the tennis games:
+
+	`./vendor/bin/phpunit`
+
+4. If you want to run f.e. only the tests for the `TennisGame1`:
+
+	`./vendor/bin/phpunit --filter TennisGame1Test`
+
 # Autor original
 
 Este repositorio es simplemente una versión adaptada del repositorio original de Emily Bache's ubicado en https://github.com/emilybache/Tennis-Refactoring-Kata
