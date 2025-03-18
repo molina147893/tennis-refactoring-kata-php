@@ -22,13 +22,55 @@ class TennisGame1 implements TennisGame
         if ($this->isTie()) {
             return $this->getTieScore();
         }
-        if ($this->player1Score >= 4 || $this->player2Score >= 4) {
-            $minusResult = $this->player1Score - $this->player2Score;
-            if (abs($minusResult) == 1) {
-                return "Advantage " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
-            }
-            return "Win for " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
+
+        if ($this->isAdvantage()) {
+            return $this->getAdvantageScore();
         }
+
+        if ($this->isWin()) {
+            return $this->getWinScore();
+        }
+
+        return $this->getDefaultScore($score);
+    }
+
+    public function isTie(): bool
+    {
+        return $this->player1Score == $this->player2Score;
+    }
+
+    public function getTieScore(): string
+    {
+        if ($this->player1Score == 0) {
+            return "Love-All";
+        }
+        if ($this->player1Score == 1) {
+            return "Fifteen-All";
+        }
+        if ($this->player1Score == 2) {
+            return "Thirty-All";
+        }
+        return "Deuce";
+    }
+
+    public function isAdvantage(): bool
+    {
+        return ($this->player1Score >= 4 || $this->player2Score >= 4) && abs($this->player1Score - $this->player2Score) == 1;
+    }
+
+    public function getAdvantageScore(): string
+    {
+        $minusResult = $this->player1Score - $this->player2Score;
+
+        return "Advantage " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
+    }
+
+    /**
+     * @param string $score
+     * @return string
+     */
+    public function getDefaultScore(string $score): string
+    {
         for ($player = 1; $player < 3; $player++) {
             if ($player == 1) {
                 $tempScore = $this->player1Score;
@@ -52,29 +94,16 @@ class TennisGame1 implements TennisGame
         return $score;
     }
 
-    /**
-     * @return string
-     */
-    public function getTieScore(): string
+    private function isWin(): bool
     {
-        if ($this->player1Score == 0) {
-            return "Love-All";
-        }
-        if ($this->player1Score == 1) {
-            return "Fifteen-All";
-        }
-        if ($this->player1Score == 2) {
-            return "Thirty-All";
-        }
-        return "Deuce";
+        return ($this->player1Score >= 4 || $this->player2Score >= 4) && abs($this->player1Score - $this->player2Score) >= 2;
     }
 
-    /**
-     * @return bool
-     */
-    public function isTie(): bool
+    private function getWinScore(): string
     {
-        return $this->player1Score == $this->player2Score;
+        $minusResult = $this->player1Score - $this->player2Score;
+
+        return "Win for " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
     }
 }
 
