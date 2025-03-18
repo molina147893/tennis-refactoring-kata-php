@@ -71,32 +71,9 @@ class TennisGame1 implements TennisGame
 
     private function getDefaultScore(): string
     {
-        $score = "";
-        for ($player = 1; $player < 3; $player++) {
-            if ($player == 1) {
-                $tempScore = $this->player1Score;
-            } else {
-                $score .= "-";
-                $tempScore = $this->player2Score;
-            }
+        $scoreResults = ["Love", "Fifteen", "Thirty", "Forty"];
 
-            if ($tempScore == 0) {
-                $score .= "Love";
-            }
-
-            if ($tempScore == 1) {
-                $score .= "Fifteen";
-            }
-
-            if ($tempScore == 2) {
-                $score .= "Thirty";
-            }
-
-            if ($tempScore == 3) {
-                $score .= "Forty";
-            }
-        }
-        return $score;
+        return implode("-", [$scoreResults[$this->player1Score], $scoreResults[$this->player2Score]]);
     }
 
     public function getGoesAheadPlayerName(): string
