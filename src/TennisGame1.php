@@ -33,16 +33,10 @@ class TennisGame1 implements TennisGame
         }
         if ($this->player1Score >= 4 || $this->player2Score >= 4) {
             $minusResult = $this->player1Score - $this->player2Score;
-            if ($minusResult == 1) {
-                return "Advantage " . $this->player1Name;
+            if (abs($minusResult) == 1) {
+                return "Advantage " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
             }
-            if ($minusResult == -1) {
-                return "Advantage ". $this->player2Name;
-            }
-            if ($minusResult >= 2) {
-                return "Win for ". $this->player1Name;
-            }
-            return "Win for ". $this->player2Name;
+            return "Win for " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
         }
         for ($player = 1; $player < 3; $player++) {
             if ($player == 1) {
