@@ -52,7 +52,7 @@ class TennisGame1 implements TennisGame
 
     private function isAdvantage(): bool
     {
-        return ($this->player1Score >= 4 || $this->player2Score >= 4) && abs($this->player1Score - $this->player2Score) == 1;
+        return ($this->hasMoreThanFourthPoints()) && $this->getScoreDifference() == 1;
     }
 
     private function getAdvantageScore(): string
@@ -90,7 +90,7 @@ class TennisGame1 implements TennisGame
 
     private function isWin(): bool
     {
-        return ($this->player1Score >= 4 || $this->player2Score >= 4) && abs($this->player1Score - $this->player2Score) >= 2;
+        return ($this->hasMoreThanFourthPoints()) && $this->getScoreDifference() >= 2;
     }
 
     private function getWinScore(): string
@@ -98,6 +98,22 @@ class TennisGame1 implements TennisGame
         $minusResult = $this->player1Score - $this->player2Score;
 
         return "Win for " . ($minusResult > 0 ? $this->player1Name : $this->player2Name);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMoreThanFourthPoints(): bool
+    {
+        return $this->player1Score >= 4 || $this->player2Score >= 4;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getScoreDifference(): int|float
+    {
+        return abs($this->player1Score - $this->player2Score);
     }
 }
 
