@@ -4,6 +4,16 @@ namespace Feature;
 
 class TennisGame1 implements TennisGame
 {
+    private const LOVE_ALL = "Love-All";
+    private const FIFTEEN_ALL = "Fifteen-All";
+    private const THIRTY_ALL = "Thirty-All";
+    private const DEUCE = "Deuce";
+    private const ADVANTAGE = "Advantage ";
+    private const WIN_FOR = "Win for ";
+    private const LOVE = "Love";
+    private const FIFTEEN = "Fifteen";
+    private const THIRTY = "Thirty";
+    private const FORTY = "Forty";
     private int $player1Score = 0;
     private int $player2Score = 0;
 
@@ -50,28 +60,28 @@ class TennisGame1 implements TennisGame
 
     private function getTieScore(): string
     {
-        $scoreResults = ["Love-All", "Fifteen-All", "Thirty-All"];
+        $scoreResults = [self::LOVE_ALL, self::FIFTEEN_ALL, self::THIRTY_ALL];
 
         if ($this->player1Score < 3) {
             return $scoreResults[$this->player1Score];
         }
 
-        return "Deuce";
+        return self::DEUCE;
     }
 
     private function getAdvantageScore(): string
     {
-        return "Advantage " . $this->getGoesAheadPlayerName();
+        return self::ADVANTAGE . $this->getGoesAheadPlayerName();
     }
 
     private function getWinScore(): string
     {
-        return "Win for " . $this->getGoesAheadPlayerName();
+        return self::WIN_FOR . $this->getGoesAheadPlayerName();
     }
 
     private function getDefaultScore(): string
     {
-        $scoreResults = ["Love", "Fifteen", "Thirty", "Forty"];
+        $scoreResults = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY];
 
         return implode("-", [$scoreResults[$this->player1Score], $scoreResults[$this->player2Score]]);
     }
