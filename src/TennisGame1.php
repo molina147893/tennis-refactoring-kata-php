@@ -86,12 +86,12 @@ class TennisGame1 implements TennisGame
         return implode("-", [$scoreResults[$this->player1Score], $scoreResults[$this->player2Score]]);
     }
 
-    public function getGoesAheadPlayerName(): string
+    private function getGoesAheadPlayerName(): string
     {
         return ($this->getScoreDifference() > 0 ? $this->player1Name : $this->player2Name);
     }
 
-    public function hasMoreThanFourthPoints(): bool
+    private function hasMoreThanFourthPoints(): bool
     {
         return $this->player1Score >= 4 || $this->player2Score >= 4;
     }
@@ -101,7 +101,7 @@ class TennisGame1 implements TennisGame
         return abs($this->getScoreDifference());
     }
 
-    public function getScoreDifference(): int|float
+    private function getScoreDifference(): int|float
     {
         return $this->player1Score - $this->player2Score;
     }
